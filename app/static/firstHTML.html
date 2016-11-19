@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/lib/w3.css">
+<body>
+
+<header class="w3-container w3-red">
+  <h1>Hospital Dashboard for Capacity Planning</h1>
+</header>
+
+
+<div class="w3-container">
+  <p>Information With The Hospital </p>
+
+  <table class="w3-table w3-bordered w3-striped">
+
+  <tr class="w3-red">
+    <th>Problems Occurred  </th>
+    <th>Total number of notifications sent for current day</th>
+    <th>Total number of potential patients by health issue for current day</th>
+  </tr>
+
+
+  <tr>
+    <td>Asthma</td>
+    <td> 23 </td>
+    <td>2</td>
+  </tr>
+
+  <tr>
+    <td>Nauseua </td>
+    <td>45</td>
+    <td>3</td>
+  </tr>
+
+  <tr>
+    <td>Dizzines </td>
+    <td>56</td>
+    <td>3</td>
+  </tr>
+
+
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+
+var geocoder = new google.maps.Geocoder();
+var address = "new york";
+
+geocoder.geocode( { 'address': address}, function(results, status) {
+
+if (status == google.maps.GeocoderStatus.OK) {
+	var latitude = results[0].geometry.location.lat();
+	var longitude = results[0].geometry.location.lng();
+    alert(latitude);
+    } 
+}); 
+</script>
+
+</body>
+</html>
