@@ -246,7 +246,6 @@ DAT.Globe = function(container, opts) {
 
   function addPoint(lat, lng, size, color, subgeo) {
 
-	size = size;
     var phi = (90 - lat) * Math.PI / 180;
     var theta = (180 - lng) * Math.PI / 180;
 

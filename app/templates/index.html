@@ -21,7 +21,7 @@
       #info {
 
         font-size: 11px;
-       /*position: absolute;*/
+        position: absolute;
         bottom: 5px;
         background-color: rgba(0,0,0,0.8);
         border-radius: 3px;
@@ -58,7 +58,7 @@
       #title {
         position: absolute;
         top: 20px;
-        width: 270px;
+        width: 400px;
         left: 20px;
         background-color: rgba(0,0,0,0.2);
         border-radius: 3px;
@@ -98,52 +98,39 @@
         background: url({{ url_for('static', filename='ce.png')}});
       }
 
-      #zip{
-        margin:auto right;
-
-      }
 
     </style>
   </head>
   <body>
-<button id="zip">find location</button>
-<form id="code1" action="">
-Enter zipcode:<input id="code" type="search" name="zipcode" placeholder="Zipcode">
-</form>
+
   <div id="container"></div>
   
-  <a href="https://github.com/kylefirst/Fire-and-Air-Quality-Visualization"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+  <a href="https://github.com/kylefirst/AirplaneCrashData-WebGL-Visualization"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
   <div id="info">
-   </span> Created by Kyle Liu, Sean Brown, Ruoxi Li, Suresh Kalyani <span class="bull">&bull;</span> Based on <span><strong><a href="http://www.chromeexperiments.com/globe">WebGL Globe</a></strong> <span class="bull">&bull;</span> Data acquired from <a href="https://www.airnow.gov/">airnow, </a><a href="http://inciweb.nwcg.gov/0/">inciweb, </a><a href="http://activefiremaps.fs.fed.us/wms.php">activefiremaps</a><span class="bull">&bull;</span></span> Locations processed with <a href="https://github.com/googlemaps/google-maps-services-python">Google Maps Geotagging API</a>
+   </span> Created by Kyle Liu <span class="bull">&bull;</span> Based on <span><strong><a href="http://www.chromeexperiments.com/globe">WebGL Globe</a></strong> <span class="bull">&bull;</span> Data acquired from <a href="https://opendata.socrata.com/Government/Airplane-Crashes-and-Fatalities-Since-1908/q2te-8cvq">Socrata</a><span class="bull">&bull;</span></span> Locations processed with <a href="https://github.com/googlemaps/google-maps-services-java">Google Maps Geotagging API</a>
   </div>
 
   <div id="currentInfo">
-    <span id="year1990" class="year">Combined</span>
-    <span id="year1995" class="year">Fire</span>
-    <span id="year2000" class="year">Air Quality</span>
+    <span id="year1990" class="year">Total</span>
+    <span id="year1995" class="year">Military</span>
+    <span id="year2000" class="year">Civilian</span>
   </div>
 
   <div id="title">
-    Fire vs. Air Quality Predictor
+    Airplane Crash Deaths Since 1908
   </div>
-<!--User form for where they specify there zip code.
-there should be a button that then lets this form pop up-->
 
+  <a id="ce" href="http://www.chromeexperiments.com/globe">
+    <span>This is a Chrome Experiment</span>
+  </a>
 
   <script type="text/javascript" src="{{ url_for('static', filename='Detector.js')}}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='three.min.js')}}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='Tween.js')}}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='globe.js')}}"></script>
   <script type="text/javascript">
-  var zipcode = document.getElementById("code");
 
-    $(document).ready(function(){
-          $("#code").hide();  
-        $("#zip").click(function(){
-            $("#code").show();
-        });
-    });
     if(!Detector.webgl){
       Detector.addGetWebGLMessage();
     } else {
@@ -180,10 +167,11 @@ there should be a button that then lets this form pop up-->
       
       
       xhr = new XMLHttpRequest();
-      xhr.open('GET', "{{ url_for('static', filename='Data.json')}}", true);
+      xhr.open('GET', "{{ url_for('static', filename='crashData.json')}}", true);
       xhr.onreadystatechange = function(e) {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
+
             var data = JSON.parse(xhr.responseText);
             window.data = data;
             for (i=0;i<data.length;i++) {
@@ -198,10 +186,6 @@ there should be a button that then lets this form pop up-->
       };
       xhr.send(null);
     }
-
-  //var zipcode_field = document.getElementById("zip").onclick() = function(){
-   //   code_form.show();
- // };
 
   </script>
 
