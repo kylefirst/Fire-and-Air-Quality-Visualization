@@ -119,7 +119,7 @@
 <button onclick="geoFindMe()">Show my location</button></p>
 <div id="out"></div>
     <form>
-	Hostpitals:<input type="radio" name="list of histpitals">
+	Hostpitals:<input type="radio" name="list of histpitals" onclick="redirect()" >
     </form>
   </div>
 
@@ -204,8 +204,11 @@ function geoFindMe() {
   function success(position) {
     var latitude  = position.coords.latitude;
     var longitude = position.coords.longitude;
-	location = [latitude,longitude];
-    output.innerHTML = '<p>Latitude is ' + latitude + ' <br>Longitude is ' + longitude + '</p>';
+    var long_NC = -82.2;
+    var lat_NC = 35.45;
+	location_current = [latitude,longitude];
+	location_NC = [lat_NC,long_NC];
+    output.innerHTML = '<p>Latitude is ' + lat_NC + ' <br>Longitude is ' + long_NC + '</p>';
 
     var img = new Image();
     img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
@@ -222,6 +225,9 @@ function geoFindMe() {
   navigator.geolocation.getCurrentPosition(success, error);
 }
 
+function redirect(){
+	window.location.assign("file location for hostptal dashboard");
+}
   </script>
 
   </body>
