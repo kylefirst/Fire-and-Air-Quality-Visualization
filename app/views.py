@@ -10,3 +10,7 @@ def index():
 @app.route('/firstHTML')
 def firstHTML():
     return render_template('firstHTML.html')
+
+@app.route('/placesearch')
+def placesearch():
+	return render_template('placesearch.html')
