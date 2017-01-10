@@ -18,16 +18,41 @@
       }
     </style>
     <script>
+
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+
+    
+        // Try HTML5 geolocation.
+        
+        
+      
+    
       // This example requires the Places library. Include the libraries=places
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyov_YrE4tVc_ONvycn6-zetUWNstJW0U&libraries=places">
 
       var map;
       var infowindow;
-		
-
+	  var lat1 = 0;
+	  var lng1 = 0;
+	  var pos = {};
+	  var mapPos = document.getElementById('map');
+	   if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+  
+          });
+      }
+    
       function initMap() {
-        var NC = {lat: 35.45, lng: -82.2};
+      	
+        var NC = {lat: -34.397, lng: 150.644};
 
 
 	var info = new google.maps.InfoWindow({map: map});
@@ -41,7 +66,7 @@
         infowindow = new google.maps.InfoWindow();
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
-          location: NC,
+          location: pos,
           radius: 100000,
           type: ['hospital']
         }, callback);
@@ -66,11 +91,14 @@
           infowindow.setContent(place.name);
           infowindow.open(map, this);
         });
-      }
+
+    
+  }
     </script>
   </head>
   <body>
     <div id="map"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyov_YrE4tVc_ONvycn6-zetUWNstJW0U&libraries=places&callback=initMap" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZcrXr114uU3S0CyDPc6I1xew74bUicQs&callback=initMap"
+    async defer></script>
   </body>
 </html>
