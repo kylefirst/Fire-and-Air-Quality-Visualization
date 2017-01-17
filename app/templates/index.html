@@ -174,7 +174,7 @@
       
       
       xhr = new XMLHttpRequest();
-      xhr.open('GET', "{{ url_for('static', filename='crashData.json')}}", true);
+      xhr.open('GET', "{{ url_for('static', filename='Data.json')}}", true);
       xhr.onreadystatechange = function(e) {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
